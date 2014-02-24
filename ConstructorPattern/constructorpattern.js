@@ -87,10 +87,17 @@ function Car( model, year, price ) {
   this.year = year;
   this.price = price;
 
-  this.toString = function () {
-    return this.model + " from " + this.year + " costs " + this.price;
-  };
+  //create for every instance
+  //this.toString = function () {
+    //return this.model + " from " + this.year + " costs " + this.price;
+  //};
 }
+
+// Note here that we are using Object.prototype.newMethod rather than
+// Object.prototype so as to avoid redefining the prototype object
+Car.prototype.toString = function () {
+  return this.model + " from " + this.year + " costs " + this.price;
+};
 
 // Usage:
 
