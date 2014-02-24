@@ -110,7 +110,7 @@ function addNewObserver(){
   check.type = "checkbox";
 
   //testing
-  check.id = (function(){ return id++;})();
+  check.id =  id++; //(function(){ return id++;})();
 
   // Extend the checkbox with the Observer class
   extend( new Observer(), check );
