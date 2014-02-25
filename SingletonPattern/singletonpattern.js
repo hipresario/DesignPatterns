@@ -7,5 +7,64 @@
 *** This is because it is neither the object or "class" that's returned by a Singleton, it's a structure.
 *** Think of how closured variables aren't actually closures - the function scope that provides the closure is the closure.
 *** In JavaScript, Singletons serve as a shared resource namespace which isolate implementation code from the global namespace
-***  so as to provide a single point of access for functions.
+*** so as to provide a single point of access for functions.
+*** Use Singleton pattern causes tight coupling
 ********/
+var mySingleton = (function () {
+
+  // Instance stores a reference to the Singleton
+  var instance;
+
+  function init() {
+
+    // Singleton
+
+    // Private methods and variables
+    function privateMethod(){
+        console.log( "I am private" );
+    }
+
+    var privateVariable = "Im also private";
+
+    var privateRandomNumber = Math.random();
+
+    return {
+
+      // Public methods and variables
+      publicMethod: function () {
+        console.log( "The public can see me!" );
+      },
+
+      publicProperty: "I am also public",
+
+      getRandomNumber: function() {
+        return privateRandomNumber;
+      }
+
+    };
+
+  };
+
+  return {
+
+    // Get the Singleton instance if one exists
+    // or create one if it doesn't
+    getInstance: function () {
+
+      if ( !instance ) {
+        instance = init();
+      }
+
+      return instance;
+    }
+
+  };
+
+})();
+
+
+
+var singleA = mySingleton.getInstance();
+var singleB = mySingleton.getInstance();
+
+console.log( singleA.getRandomNumber() === singleB.getRandomNumber() ); // true
